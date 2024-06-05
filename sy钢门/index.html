@@ -16,15 +16,33 @@
 
       #play-pause {
         position: absolute;
-        width: 100px;
-        height: 100px;
-        bottom: 30px;
-        left: 45%;
+        width: 80px;
+        height: 80px;
+        bottom: 80px;
+        left: 47%;
         cursor: pointer;
+        display: none;
       }
 
       .active {
         animation: clickAnim 0.3s;
+      }
+
+      /* loading bar styles */
+      .loading-bar {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 60%;
+        height: 20px;
+        background-color: #ccc;
+        transform: translate(-50%, -50%);
+      }
+
+      .loading-bar-progress {
+        height: 100%;
+        background-color: #4caf50;
+        width: 0; /* initial width set to 0 */
       }
 
     </style>
@@ -33,6 +51,10 @@
       
   </head>
   <body>
+    <div id="loading-bar" class="loading-bar">
+      <div id="loading-bar-progress" class="loading-bar-progress"></div>
+    </div>
+
     <model-viewer id="mv" autoplay="false" src="钢门小样.glb" ar ar-modes="webxr scene-viewer quick-look" camera-controls tone-mapping="neutral" poster="poster.webp" shadow-intensity="1" animation-name="面板Action" min-camera-orbit="auto auto 10m" max-camera-orbit="auto auto 158.8m" camera-orbit="-24.48deg 94.4deg 158.8m" field-of-view="40.56deg">
       <div class="progress-bar hide" slot="progress-bar">
         <div class="update-bar"></div>
@@ -50,13 +72,23 @@
     <script>
       var mv = document.getElementById('mv');
       var button = document.getElementById('play-pause');
+      var loadingBar = document.getElementById('loading-bar');
+      var loadingBarProgress = document.getElementById('loading-bar-progress');
+
+      mv.addEventListener('progress', function(e) {
+        // calculate the progress percentage and update the width of the progress bar
+        var progressPercentage = (e.detail.totalProgress * 100).toFixed(2);
+        loadingBarProgress.style.width = progressPercentage + '%';
+      });
 
       mv.addEventListener('load', function() {
-          mv.pause();
+        mv.pause();
+        button.style.display = "block"; // when the model is fully loaded, we show the play/pause button
+        loadingBar.style.display = "none"; // and hide the loading bar
       });
 
       mv.addEventListener('loop', function() {
-          mv.pause();
+        mv.pause();
       });
 
       button.addEventListener('click', function() {
