@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
-  <head>
+<head>
     <title>&lt;model-viewer&gt; template</title>
     <meta charset="utf-8">
     <meta name="description" content="&lt;model-viewer&gt; template">
@@ -8,109 +8,82 @@
     <link type="text/css" href="./styles.css" rel="stylesheet"/>
 
     <style>
-      @keyframes clickAnim {
-        0% {transform: scale(1);}
-        50% {transform: scale(0.8);}
-        100% {transform: scale(1);}
-      }
+        @keyframes clickAnim {
+            0% {transform: scale(1);}
+            50% {transform: scale(0.7);}
+            100% {transform: scale(1.4);}
+        }
 
-      #play-pause {
-        position: absolute;
-        width: 80px;
-        height: 80px;
-        bottom: 80px;
-        right: 47%;
-        cursor: pointer;
-        display: none;
-      }
+        #play-pause {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            bottom: 80px;
+            right: 47%;
+            cursor: pointer;
+            display: none; /* Initially hidden */
+            transition: transform 0.5s ease; /* Smooth transition for scaling */
+        }
 
-      .active {
-        animation: clickAnim 0.3s;
-      }
+        #play-pause:hover {
+            transform: scale(1.4); /* Scale up on hover */
+        }
 
-      /* loading bar styles */
-      .loading-bar {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 60%;
-        height: 20px;
-        background-color: #ccc;
-        transform: translate(-50%, -50%);
-      }
-
-      .loading-bar-progress {
-        height: 100%;
-        background-color: #4caf50;
-        width: 0;
-      }
-
+        .active {
+            animation: clickAnim 0.3s;
+        }
     </style>
 
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
-      
-  </head>
-  <body>
-    <div id="loading-bar" class="loading-bar">
-      <div id="loading-bar-progress" class="loading-bar-progress"></div>
-    </div>
-
-    <model-viewer id="mv" autoplay="false" src="木门小样.glb" ar ar-modes="webxr scene-viewer quick-look" camera-controls tone-mapping="neutral" poster="poster.webp" shadow-intensity="1" animation-name="Cube.007Action" min-camera-orbit="auto auto 10m" max-camera-orbit="auto auto 34.34m" camera-orbit="14.33deg 97.39deg 34.34m" field-of-view="42.17deg">
-      <div class="progress-bar hide" slot="progress-bar">
-        <div class="update-bar"></div>
-      </div>
-      <button slot="ar-button" id="ar-button">
-        View in your space
-      </button>
-      <div id="ar-prompt">
-        <img src="ar_hand_prompt.png">
-      </div>
+</head>
+<body>
+    <model-viewer id="mv" autoplay="false" src="木门小样.glb" ar ar-modes="webxr scene-viewer quick-look" camera-controls tone-mapping="neutral" poster="1.gif" shadow-intensity="1" animation-name="Cube.007Action" min-camera-orbit="auto auto 10m" max-camera-orbit="auto auto 34.34m" camera-orbit="14.33deg 97.39deg 34.34m" field-of-view="42.17deg">
+        <div class="progress-bar hide" slot="progress-bar">
+            <div class="update-bar"></div>
+        </div>
+        <button slot="ar-button" id="ar-button">
+            View in your space
+        </button>
+        <div id="ar-prompt">
+            <img src="ar_hand_prompt.png">
+        </div>
     </model-viewer>
 
     <img id="play-pause" src="钥匙.png" alt="播放和暂停按钮">
 
     <script>
-      var mv = document.getElementById('mv');
-      var button = document.getElementById('play-pause');
-      var loadingBar = document.getElementById('loading-bar');
-      var loadingBarProgress = document.getElementById('loading-bar-progress');
+        var mv = document.getElementById('mv');
+        var button = document.getElementById('play-pause');
 
-      mv.addEventListener('progress', function(e) {
-        var progressPercentage = (e.detail.totalProgress * 100).toFixed(2);
-        loadingBarProgress.style.width = progressPercentage + '%';
-      });
-
-      mv.addEventListener('load', function() {
-        mv.pause();
-        button.style.display = "block"; 
-        loadingBar.style.display = "none"; 
-      });
-
-      mv.addEventListener('loop', function() {
-          mv.pause();
-      });
-
-      button.addEventListener('click', function() {
-        button.classList.add('active');
-        
-        if (mv.paused) {
-          mv.play();
-          setTimeout(function() {
+        mv.addEventListener('load', function() {
             mv.pause();
-          }, 1792);
-        } else {
-          mv.play();
-        }
-        
-        setTimeout(function(){
-          button.classList.remove('active');
-        }, 300);
-      });
+            button.style.display = "block"; // Show the button when the model is loaded
+        });
+
+        mv.addEventListener('loop', function() {
+            mv.pause();
+        });
+
+        button.addEventListener('click', function() {
+            button.classList.add('active');
+            
+            if (mv.paused) {
+                mv.play();
+                setTimeout(function() {
+                    mv.pause();
+                }, 1792);
+            } else {
+                mv.play();
+            }
+            
+            setTimeout(function(){
+                button.classList.remove('active');
+            }, 300);
+        });
     </script>
 
     <script src="script.js"></script>
     <!-- Loads <model-viewer> for browsers: -->
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
-
-  </body>
+</body>
 </html>
