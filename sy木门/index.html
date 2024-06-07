@@ -8,7 +8,7 @@
     <link type="text/css" href="./styles.css" rel="stylesheet"/>
 
     <style>
-        html, body {
+html, body {
     height: 100%;
     margin: 0;
     overflow: hidden; /* Prevent scrolling */
@@ -30,7 +30,7 @@ model-viewer {
             width: 80px;
             height: 80px;
             bottom: 20px;
-            right: 47%;
+            left: 47%;
             cursor: pointer;
             display: none; /* Initially hidden */
             transition: transform 0.5s ease; /* Smooth transition for scaling */
@@ -42,6 +42,96 @@ model-viewer {
 
         .active {
             animation: clickAnim 0.3s;
+        }
+
+        /* Styles for the left-panel and modal */
+        .left-panel {
+            position: absolute;
+            left: 100px;
+            top: 15%;
+            display: none; /* Initially hidden */
+        }
+
+        .img-button {
+            width: 100px;
+            height: 100px;
+            cursor: pointer;
+            transition: transform 0.1s;
+            background: none;
+            padding: 0;
+            border: none;
+            outline: none;
+            transform-origin: center; /* Ensure scaling from the center */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center; /* if text exceeds one line */
+            transition: transform 0.3s ease; /* Add transition for smooth scaling */
+        }
+
+        .img-button img {
+            width: 100%; /* Ensure image fills the button size */
+            height: auto;
+            display: block; /* Center image within button */
+            margin: auto;
+            margin-bottom: 10px; /* Space between the image and the text */
+            transition: transform 0.3s ease; /* Add transition for smooth scaling */
+        }
+
+        .img-button span {
+            font-size: 20px; /* Font size */
+            font-weight: bold; /* Font weight, can be 'normal', 'bold', or a number between 100 and 900 */
+            color: white;
+            text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
+            white-space: nowrap; /* Ensure text does not wrap */
+            transition: transform 0.3s ease; /* Add transition for smooth scaling */
+            display: block; /* Important for centering single line text */
+        }
+
+        .img-button:active {
+            transform: scale(0.5);
+        }
+
+        .img-button:hover img,
+        .img-button:hover span {
+            transform: scale(1.2); /* Scale image and text on hover */
+        }
+
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%; /* Could be more or less, depending on screen size */
+            text-align: left;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
         }
     </style>
 
@@ -62,13 +152,45 @@ model-viewer {
 
     <img id="play-pause" src="钥匙.png" alt="播放和暂停按钮">
 
+    <!-- Left panel with dialog trigger button -->
+    <div class="left-panel" id="left-panel">
+        <button class="img-button" id="info-button">
+            <img src="图标2.png" width="100"/>
+            <span>Info</span>
+        </button>
+    </div>
+
+    <!-- The Modal -->
+    <div id="infoModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p>①Move the perspective with the left mouse button.
+<br/>②Use the mouse wheel to zoom in and out of the perspective.
+<br/>③Click on any part of the model to focus the perspective.
+<br/>④Clicking on a blank area will reset the perspective center.
+<br/>⑤The key button can be used to open and close the door.
+<br/>(If there is no response after clicking, please rotate the view and click again!)</p>
+        </div>
+    </div>
+
     <script>
         var mv = document.getElementById('mv');
         var button = document.getElementById('play-pause');
+        var leftPanel = document.getElementById('left-panel');
+        var loadingBar = document.getElementById('loading-bar');
+        var loadingBarProgress = document.getElementById('loading-bar-progress');
+
+        mv.addEventListener('progress', function(e) {
+            // calculate the progress percentage and update the width of the progress bar
+            var progressPercentage = (e.detail.totalProgress * 100).toFixed(2);
+            loadingBarProgress.style.width = progressPercentage + '%';
+        });
 
         mv.addEventListener('load', function() {
             mv.pause();
-            button.style.display = "block"; // Show the button when the model is loaded
+            button.style.display = "block"; // when the model is fully loaded, we show the play/pause button
+            leftPanel.style.display = "block"; // show the left-panel when the model is fully loaded
+            loadingBar.style.display = "none"; // and hide the loading bar
         });
 
         mv.addEventListener('loop', function() {
@@ -76,6 +198,7 @@ model-viewer {
         });
 
         button.addEventListener('click', function() {
+            // 点击时添加动画类
             button.classList.add('active');
             
             if (mv.paused) {
@@ -87,10 +210,37 @@ model-viewer {
                 mv.play();
             }
             
+            // 动画结束后移除类
             setTimeout(function(){
                 button.classList.remove('active');
             }, 300);
         });
+
+        // Get the modal
+        var modal = document.getElementById("infoModal");
+
+        // Get the button that opens the modal
+        var btn = document.getElementById("info-button");
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // When the user clicks the button, open the modal 
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
     </script>
 
     <script src="script.js"></script>
