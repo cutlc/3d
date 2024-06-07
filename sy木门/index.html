@@ -30,7 +30,8 @@ model-viewer {
             width: 80px;
             height: 80px;
             bottom: 20px;
-            left: 47%;
+            left: 50%;  /* Changed from right: 47%; to left: 50%; */
+    transform: translateX(-50%);  /* Added this line */
             cursor: pointer;
             display: none; /* Initially hidden */
             transition: transform 0.5s ease; /* Smooth transition for scaling */
@@ -47,8 +48,8 @@ model-viewer {
         /* Styles for the left-panel and modal */
         .left-panel {
             position: absolute;
-            left: 100px;
-            top: 15%;
+          left: 20px;
+            top: 5%;
             display: none; /* Initially hidden */
         }
 
