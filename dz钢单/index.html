@@ -71,6 +71,7 @@ model-viewer {
             right: 100px;
             top: 50%;
             transform: translateY(-50%);
+            display: none; /* Hide by default */
         }
 
         .control-panel .img-button {
@@ -82,6 +83,7 @@ model-viewer {
             left: 30px;
             top: 11%;
             transform: translateY(-50%);
+            display: none; /* Hide by default */
         }
 
         .left-panel .img-button {
@@ -253,6 +255,13 @@ model-viewer {
             modal.style.display = "none";
         }
     }
+
+       // Show the control panel and left panel after the model is loaded
+    const modelViewer = document.querySelector('#pan-demo');
+    modelViewer.addEventListener('load', () => {
+        document.querySelector('.control-panel').style.display = 'block';
+        document.querySelector('.left-panel').style.display = 'block';
+    });
 </script>
 </body>
 </html>
