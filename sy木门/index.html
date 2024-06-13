@@ -21,8 +21,8 @@ model-viewer {
 }
         @keyframes clickAnim {
             0% {transform: scale(1);}
-            50% {transform: scale(0.7);}
-            100% {transform: scale(1.4);}
+            50% {transform: scale(0.9);}
+            100% {transform: scale(1.1);}
         }
 
         #play-pause {
@@ -37,7 +37,7 @@ model-viewer {
         }
 
         #play-pause:hover {
-            transform: scale(1.4); /* Scale up on hover */
+            transform: scale(1.1); /* Scale up on hover */
         }
 
         .active {
@@ -152,27 +152,6 @@ model-viewer {
 
     <img id="play-pause" src="钥匙.png" alt="播放和暂停按钮">
 
-    <!-- Left panel with dialog trigger button -->
-    <div class="left-panel" id="left-panel">
-        <button class="img-button" id="info-button">
-            <img src="图标2.png" width="100"/>
-            <span>Info</span>
-        </button>
-    </div>
-
-    <!-- The Modal -->
-    <div id="infoModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <p>①Move the perspective with the left mouse button.
-<br/>②Use the mouse wheel to zoom in and out of the perspective.
-<br/>③Click on any part of the model to focus the perspective.
-<br/>④Clicking on a blank area will reset the perspective center.
-<br/>⑤The key button can be used to open and close the door.
-<br/>(If there is no response after clicking, please rotate the view and click again!)</p>
-        </div>
-    </div>
-
     <script>
         var mv = document.getElementById('mv');
         var button = document.getElementById('play-pause');
@@ -215,12 +194,6 @@ model-viewer {
                 button.classList.remove('active');
             }, 300);
         });
-
-        // Get the modal
-        var modal = document.getElementById("infoModal");
-
-        // Get the button that opens the modal
-        var btn = document.getElementById("info-button");
 
         // Get the <span> element that closes the modal
         var span = document.getElementsByClassName("close")[0];
