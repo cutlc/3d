@@ -21,8 +21,8 @@ model-viewer {
 }
         @keyframes clickAnim {
             0% {transform: scale(1);}
-            50% {transform: scale(0.7);}
-            100% {transform: scale(1);}
+            50% {transform: scale(0.8);}
+            100% {transform: scale(1.2);}
         }
 
         #play-pause {
@@ -36,7 +36,7 @@ model-viewer {
         }
 
         #play-pause:hover {
-            transform: scale(1); /* Scale up on hover */
+            transform: scale(1.2); /* Scale up on hover */
         }
 
         .active {
@@ -157,7 +157,7 @@ model-viewer {
     position: absolute;
     height: 100%;
     width: 0;
-    background-color: #4CAF50; /* 可以调整背景色 */
+    background-color: #bbf49b; /* 可以调整背景色 */
     text-align: center; /* 保证文字居中 */
     transition: width 0.5s; /* 增加平滑效果 */
 }
@@ -171,6 +171,7 @@ model-viewer {
     font-weight: bold; /* 设置文字为粗体 */
 font-size: 15px;  /* 文字大小，可以根据需要调整 */
 }
+
     </style>
 
     <script type="module" src="model-viewer.min.js"></script>
