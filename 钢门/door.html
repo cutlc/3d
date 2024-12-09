@@ -21,8 +21,8 @@ model-viewer {
 }
         @keyframes clickAnim {
             0% {transform: scale(1);}
-            50% {transform: scale(1);}
-            100% {transform: scale(1);}
+            50% {transform: scale(0.8);}
+            100% {transform: scale(1.2);}
         }
 
         #play-pause {
@@ -40,7 +40,7 @@ model-viewer {
         }
 
         .active {
-            animation: clickAnim 1s;
+            animation: clickAnim 0.3s;
         }
 
         /* Styles for the left-panel and modal */
@@ -177,15 +177,9 @@ font-size: 15px;  /* 文字大小，可以根据需要调整 */
     <script type="module" src="model-viewer.min.js"></script>
 </head>
 <body>
-    <model-viewer id="mv"background-color="red"stutoplay="false" src="钢门小样.glb" ar ar-modes="webxr scene-viewer quick-look" camera-controls tone-mapping="neutral" poster="1.gif" shadow-intensity="1" animation-name="面板Action" min-camera-orbit="auto auto 10m" max-camera-orbit="auto auto 158.8m" camera-orbit="-24.48deg 94.4deg 158.8m" field-of-view="40.56deg"environment-image="背景.hdr" skybox-image="底色.jpg" exposure="1.5">
+    <model-viewer id="mv"background-color="red"stutoplay="false" src="钢门小样.glb" camera-controls tone-mapping="neutral" poster="1.gif" shadow-intensity="1" animation-name="面板Action" min-camera-orbit="auto auto 10m" max-camera-orbit="auto auto 158.8m" camera-orbit="-24.48deg 94.4deg 158.8m" field-of-view="40.56deg"environment-image="背景.hdr" skybox-image="底色.jpg" exposure="1.5">
         <div class="progress-bar hide" slot="progress-bar">
             <div class="update-bar"></div>
-        </div>
-        <button slot="ar-button" id="ar-button">
-            View in your space
-        </button>
-        <div id="ar-prompt">
-            <img src="ar_hand_prompt.png">
         </div>
     </model-viewer>
 
