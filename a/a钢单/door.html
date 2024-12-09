@@ -21,7 +21,7 @@ model-viewer {
 
 .button1, .button2, .button3, .button4, .button5 {
     position: absolute;
-    right: 10px;
+    right: 1vw;
     background: transparent; /* 背景透明 */
     border: none; /* 移除边框 */
     padding: 0; /* 移除内边距 */
@@ -100,15 +100,9 @@ model-viewer {
 </head>
 <body>
 <!-- <model-viewer> HTML element -->
-<model-viewer id="pan-demo" disable-tap touch-action="pan-y" src="钢质单开门.glb" ar ar-modes="webxr scene-viewer quick-look" camera-controls tone-mapping="neutral" poster="1.gif" shadow-intensity="1" min-camera-orbit="-45deg 45deg 300m" max-camera-orbit="45deg 97deg 500m" camera-target="0m 0m 0m" camera-orbit="-45deg 90deg 9534m" field-of-view="30deg" environment-image="autumn_field_puresky_1k.hdr" skybox-image="autumn_field_puresky_1k.hdr" exposure="1">
+<model-viewer id="pan-demo" disable-tap touch-action="pan-y" src="钢质单开门.glb" camera-controls tone-mapping="neutral" poster="1.gif" shadow-intensity="1" min-camera-orbit="-45deg 45deg 300m" max-camera-orbit="45deg 97deg 500m" camera-target="0m 0m 0m" camera-orbit="-45deg 90deg 9534m" field-of-view="30deg" environment-image="autumn_field_puresky_1k.hdr" skybox-image="autumn_field_puresky_1k.hdr" exposure="1">
     <div class="progress-bar hide" slot="progress-bar">
         <div class="update-bar"></div>
-    </div>
-    <button slot="ar-button" id="ar-button">
-        View in your space
-    </button>
-    <div id="ar-prompt">
-        <img src="ar_hand_prompt.png">
     </div>
 </model-viewer>
 
