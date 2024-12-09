@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>&lt;model-viewer&gt; template</title>
+    <meta charset="utf-8">
+    <meta name="description" content="&lt;model-viewer&gt; template">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link type="text/css" href="./styles.css" rel="stylesheet"/>
+    <style>
+html, body {
+    height: 100%;
+    margin: 0;
+    overflow: hidden; /* Prevent scrolling */
+}
+
+model-viewer {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.button1, .button2, .button3, .button4, .button5 {
+    position: absolute;
+    right: 10px;
+    background: transparent; /* 背景透明 */
+    border: none; /* 移除边框 */
+    padding: 0; /* 移除内边距 */
+    cursor: pointer;
+    transition: transform 0.2s ease; /* 缩放动画 */
+    display: none; /* 隐藏控制面板，直到模型加载完成 */
+}
+
+.button1 { top: 5%; }
+.button2 { top: 21%; }
+.button3 { top: 37%; }
+.button4 { top: 53%; }
+.button5 { top: 69%; }
+
+.img-button {
+    height: 14vh; /* 根据视口高度缩放 */
+aspect-ratio: 3.7 / 4; /* 设置宽高比为 3.7:4 */
+}
+
+.img-button img {
+    width: 100%; /* 图片宽度填充按钮 */
+    height: 100%; /* 图片高度填充按钮 */
+    object-fit: contain; /* 保持图片比例 */
+}
+
+/* 鼠标悬停时的样式 */
+.img-button:hover {
+    transform: scale(1.2); /* 放大按钮 */
+}
+
+/* 鼠标点击时的样式 */
+.img-button:active {
+    transform: scale(1); /* 缩小按钮 */
+    transition: transform 0.05s ease; /* 缩小动画更快 */
+}
+
+/* 进度条样式 */
+#loading-container {
+    position: absolute;
+    top: 2px; /* 可以调整 */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 65%; /* 可以调整 */
+    height: 20px; /* 可以调整 */
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 15px; /* 圆角 */
+    overflow: hidden; /* 确保内部元素不会超出容器 */
+}
+
+#loading-bar {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.2); /* 可以调整背景色 */
+}
+
+#loading-bar-progress {
+    position: absolute;
+    height: 100%;
+    width: 0;
+    background-color: #bbf49b; /* 可以调整背景色 */
+    text-align: center; /* 保证文字居中 */
+    transition: width 0.5s; /* 增加平滑效果 */
+}
+
+#progress-percent {
+    position: relative;
+    display: inline-block;
+    bottom: 2px; /* 根据需要调整位置 */
+    color: white; /* 根据需要调整颜色 */
+    text-shadow: 1px 1px 2px black; /* 文字阴影效果 */
+    font-weight: bold; /* 设置文字为粗体 */
+    font-size: 15px;  /* 文字大小，可以根据需要调整 */
+}
+
+    </style>
+</head>
+<body>
+<!-- <model-viewer> HTML element -->
+<model-viewer id="pan-demo" disable-tap touch-action="pan-y" src="钢木双开门.glb" ar ar-modes="webxr scene-viewer quick-look" camera-controls tone-mapping="neutral" poster="1.gif" shadow-intensity="1" min-camera-orbit="-45deg 45deg 300m" max-camera-orbit="45deg 97deg 500m" camera-target="0m 0m 0m" camera-orbit="-45deg 90deg 9534m" field-of-view="30deg" environment-image="autumn_field_puresky_1k.hdr" skybox-image="autumn_field_puresky_1k.hdr" exposure="1">
+    <div class="progress-bar hide" slot="progress-bar">
+        <div class="update-bar"></div>
+    </div>
+</model-viewer>
+
+<!-- Material variants switcher buttons -->
+<div class="control-panel">
+
+    <button class="img-button button1" id="default-material">
+        <img src="1.png" width="100"/>
+    </button>
+
+    <br/><button class="img-button button2" id="material1">
+        <img src="2.png" width="100"/>
+    </button>
+
+    <br/><button class="img-button button3" id="material2">
+        <img src="3.png" width="100"/>
+    </button>
+
+    <br/><button class="img-button button4" id="material3">
+                <img src="4.png" width="100"/>
+    </button>
+
+    <br/><button class="img-button button5" id="material4">
+        <img src="5.png" width="100"/>
+    </button>
+
+</div>
+
+/* 进度条 */
+<div id="loading-container">
+    <div id="loading-bar">
+        <div id="loading-bar-progress">
+            <span id="progress-percent"></span>
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+<!-- Loads <model-viewer> for browsers: -->
+<script type="module" src="model-viewer.min.js"></script>
+
+<script>
+    document.querySelector('#default-material').addEventListener('click', () => {
+        const model = document.querySelector('#pan-demo');
+        model.variantName = '1';
+    });
+
+    document.querySelector('#material1').addEventListener('click', () => {
+        const model = document.querySelector('#pan-demo');
+        model.variantName = '2';
+    });
+
+    document.querySelector('#material2').addEventListener('click', () => {
+        const model = document.querySelector('#pan-demo');
+        model.variantName = '3';
+    });
+
+    document.querySelector('#material3').addEventListener('click', () => {
+        const model = document.querySelector('#pan-demo');
+        model.variantName = '4';
+    });
+
+    document.querySelector('#material4').addEventListener('click', () => {
+        const model = document.querySelector('#pan-demo');
+        model.variantName = '5';
+    });
+
+    // 进度条监听
+    var mv = document.getElementById('pan-demo'); 
+    var loadingBar = document.getElementById('loading-bar');
+    var loadingBarProgress = document.getElementById('loading-bar-progress');
+    var progressPercent = document.getElementById('progress-percent');
+
+    mv.addEventListener('progress', function(e) {
+        var progressPercentage = (e.detail.totalProgress * 100).toFixed(2);
+        loadingBarProgress.style.width = progressPercentage + '%';
+        progressPercent.textContent = progressPercentage + '%';
+    });
+
+    mv.addEventListener('load', function() {
+        mv.pause();
+        button.style.display = "block"; // when the model is fully loaded, we show the play/pause button
+        for(let btn of document.querySelectorAll('.img-button')) {
+           btn.style.display = "block"; // show the material switcher buttons
+        }
+        loadingBar.style.display = "none"; // and hide the loading bar
+    });
+
+    // Show the control panel and left panel after the model is loaded
+    const modelViewer = document.querySelector('#pan-demo');
+    modelViewer.addEventListener('load', () => {
+        document.querySelector('.button1').style.display = 'block';
+        document.querySelector('.button2').style.display = 'block';
+        document.querySelector('.button3').style.display = 'block';
+        document.querySelector('.button4').style.display = 'block';
+        document.querySelector('.button5').style.display = 'block';
+    });
+</script>
+</body>
+</html>
