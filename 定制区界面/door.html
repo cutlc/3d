@@ -616,24 +616,46 @@
         document.getElementById('modelBox9').style.zIndex = 1;
     });
 // 获取模型查看器元素
-        var modelViewer = document.getElementById('mv1');
+        var mv1 = document.getElementById('mv1');
+        var mv2 = document.getElementById('mv2');
+        var mv3 = document.getElementById('mv3');
+        var mv4 = document.getElementById('mv4');
+        var mv5 = document.getElementById('mv5');
+        var mv6 = document.getElementById('mv6');
+        var mv7 = document.getElementById('mv7');
+        var mv8 = document.getElementById('mv8');
+        var mv9 = document.getElementById('mv9');
         var progressBar = document.getElementById('progressBar');
+        var loadingElement = document.getElementById('loading');
+        var modelsLoaded = 0;
 
-        // 监听模型加载进度事件
-        modelViewer.addEventListener('progress', function(event) {
-            // 更新进度条
-            var progress = event.detail.totalProgress * 100; // 获取加载进度
+        function updateProgressBar(progress) {
             progressBar.style.width = progress + '%';
             progressBar.textContent = Math.round(progress) + '%';
-        });
+        }
 
-        // 监听模型加载完成事件
-        modelViewer.addEventListener('load', function() {
-            // 模拟加载完成后的1秒停顿
-            setTimeout(function() {
-                document.getElementById('loading').style.display = 'none'; // 隐藏加载界面
-            }, 1000);
-        });
+        function onModelLoaded() {
+            modelsLoaded++;
+            var progress = (modelsLoaded / 9) * 100; // 总共两个模型
+            updateProgressBar(progress);
+
+            if (modelsLoaded === 9) {
+                // 所有模型加载完成
+                setTimeout(function() {
+                    loadingElement.style.display = 'none';
+                }, 1000);
+            }
+        }
+
+        mv1.addEventListener('load', onModelLoaded);
+        mv2.addEventListener('load', onModelLoaded);
+        mv3.addEventListener('load', onModelLoaded);
+        mv4.addEventListener('load', onModelLoaded);
+        mv5.addEventListener('load', onModelLoaded);
+        mv6.addEventListener('load', onModelLoaded);
+        mv7.addEventListener('load', onModelLoaded);
+        mv8.addEventListener('load', onModelLoaded);
+        mv9.addEventListener('load', onModelLoaded);
 //切换贴图
         document.getElementById('swapButton1A').addEventListener('click', () => {
             const model = document.getElementById('mv1'); // 使用正确的 ID
