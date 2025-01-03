@@ -1,0 +1,1376 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <title>&lt;model-viewer&gt; 模板</title>
+    <meta charset="utf-8">
+    <meta name="description" content="&lt;model-viewer&gt; 模板">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link type="text/css" href="./styles.css" rel="stylesheet"/>
+    <style>
+        #modelBox1, #modelBox2, #modelBox3, #modelBox4, #modelBox5, #modelBox6, #modelBox7, #modelBox8, #modelBox9 {
+            position: absolute;
+            width: 100%; /* 根据需要调整 */
+            height: 100%; /* 根据需要调整 */
+            top: 50%; /* 根据需要调整 */
+            left: 50%; /* 根据需要调整 */
+            transform: translate(-50%, -50%);
+            z-index: 1; /* 默认 z-index */
+        }
+        #modelBox2 {
+            z-index: 0; /* 初始设置为较低的 z-index */
+        }
+        #modelBox3 {
+            z-index: 0; /* 初始设置为较低的 z-index */
+        }
+        #modelBox4 {
+            z-index: 0; /* 初始设置为较低的 z-index */
+        }
+        #modelBox5 {
+            z-index: 0; /* 初始设置为较低的 z-index */
+        }
+        #modelBox6 {
+            z-index: 0; /* 初始设置为较低的 z-index */
+        }
+        #modelBox7 {
+            z-index: 0; /* 初始设置为较低的 z-index */
+        }
+        #modelBox8 {
+            z-index: 0; /* 初始设置为较低的 z-index */
+        }
+        #modelBox9 {
+            z-index: 0; /* 初始设置为较低的 z-index */
+        }
+        model-viewer {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+/* 按钮样式 */
+    #swapButton1, #swapButton2, #swapButton3, #swapButton4, #swapButton5, #swapButton6, #swapButton7, #swapButton8, #swapButton9,
+ #swapButton1A, #swapButton1B, #swapButton1C, #swapButton1D, #swapButton1E,
+ #swapButton2A, #swapButton2B, #swapButton2C, #swapButton2D, #swapButton2E,
+ #swapButton3A, #swapButton3B, #swapButton3C, #swapButton3D, #swapButton3E,
+ #swapButton4A, #swapButton4B, #swapButton4C, #swapButton4D, #swapButton4E,
+ #swapButton5A, #swapButton5B, #swapButton5C, #swapButton5D, #swapButton5E,
+ #swapButton6A, #swapButton6B, #swapButton6C, #swapButton6D, #swapButton6E,
+ #swapButton7A, #swapButton7B, #swapButton7C, #swapButton7D, #swapButton7E,
+ #swapButton8A, #swapButton8B, #swapButton8C, #swapButton8D, #swapButton8E,
+ #swapButton9A, #swapButton9B, #swapButton9C, #swapButton9D, #swapButton9E {
+        position: absolute;
+        z-index: 10; /* 确保按钮在模型查看器之上 */
+        width: 50px; /* 设置按钮宽度 */
+        height: 30px; /* 设置按钮高度 */
+        font-size: 18px; /* 设置文字大小 */
+        border-radius: 5px; /* 圆角边框 */
+        cursor: pointer; /* 鼠标悬停时显示指针 */
+    }
+        #swapButton1 {
+	    position: absolute;
+            top: 20px; /* 根据需要调整 */
+            left: 20px; /* 根据需要调整 */
+        }
+        #swapButton2 {
+            position: absolute;
+            top: 60px; /* 根据需要调整 */
+            left: 20px; /* 根据需要调整 */
+        }
+        #swapButton3 {
+            position: absolute;
+            top: 100px; /* 根据需要调整 */
+            left: 20px; /* 根据需要调整 */
+        }
+        #swapButton4 {
+            position: absolute;
+            top: 140px; /* 根据需要调整 */
+            left: 20px; /* 根据需要调整 */
+        }
+        #swapButton5 {
+            position: absolute;
+            top: 180px; /* 根据需要调整 */
+            left: 20px; /* 根据需要调整 */
+        }
+        #swapButton6 {
+            position: absolute;
+            top: 220px; /* 根据需要调整 */
+            left: 20px; /* 根据需要调整 */
+        }
+        #swapButton7 {
+            position: absolute;
+            top: 260px; /* 根据需要调整 */
+            left: 20px; /* 根据需要调整 */
+        }
+        #swapButton8 {
+            position: absolute;
+            top: 300px; /* 根据需要调整 */
+            left: 20px; /* 根据需要调整 */
+        }
+        #swapButton9 {
+            position: absolute;
+            top: 340px; /* 根据需要调整 */
+            left: 20px; /* 根据需要调整 */
+        }
+        #swapButton1A {
+            position: absolute;
+            top: 20px; /* 根据需要调整 */
+            left: 80px; /* 根据需要调整 */
+        }
+        #swapButton1B {
+            position: absolute;
+            top: 60px; /* 根据需要调整 */
+            left: 80px; /* 根据需要调整 */
+        }
+        #swapButton1C {
+            position: absolute;
+            top: 100px; /* 根据需要调整 */
+            left: 80px; /* 根据需要调整 */
+        }
+        #swapButton1D {
+            position: absolute;
+            top: 140px; /* 根据需要调整 */
+            left: 80px; /* 根据需要调整 */
+        }
+        #swapButton1E {
+            position: absolute;
+            top: 180px; /* 根据需要调整 */
+            left: 80px; /* 根据需要调整 */
+        }
+        #swapButton2A {
+            position: absolute;
+            top: 20px; /* 根据需要调整 */
+            left: 80px; /* 根据需要调整 */
+        }
+        #swapButton2B {
+            position: absolute;
+            top: 60px; /* 根据需要调整 */
+            left: 80px; /* 根据需要调整 */
+        }
+        #swapButton2C {
+            position: absolute;
+            top: 100px; /* 根据需要调整 */
+            left: 80px; /* 根据需要调整 */
+        }
+        #swapButton2D {
+            position: absolute;
+            top: 140px; /* 根据需要调整 */
+            left: 80px; /* 根据需要调整 */
+        }
+        #swapButton2E {
+            position: absolute;
+            top: 180px; /* 根据需要调整 */
+            left: 80px; /* 根据需要调整 */
+        }
+        #swapButton3A {
+            position: absolute;
+            top: 20px; /* 根据需要调整 */
+            left: 80px; /* 根据需要调整 */
+        }
+        #swapButton3B {
+            position: absolute;
+            top: 60px; /* 根据需要调整 */
+            left: 80px; /* 根据需要调整 */
+        }
+        #swapButton3C {
+            position: absolute;
+            top: 100px; /* 根据需要调整 */
+            left: 80px; /* 根据需要调整 */
+        }
+        #swapButton3D {
+            position: absolute;
+            top: 140px; /* 根据需要调整 */
+            left: 80px; /* 根据需要调整 */
+        }
+        #swapButton3E {
+            position: absolute;
+            top: 180px; /* 根据需要调整 */
+            left: 80px; /* 根据需要调整 */
+        }
+        #swapButton4A {
+            position: absolute;
+            top: 20px; /* 根据需要调整 */
+            left: 80px; /* 根据需要调整 */
+        }
+        #swapButton4B {
+            position: absolute;
+            top: 60px; /* 根据需要调整 */
+            left: 80px; /* 根据需要调整 */
+        }
+        #swapButton4C {
+            position: absolute;
+            top: 100px; /* 根据需要调整 */
+            left: 80px; /* 根据需要调整 */
+        }
+        #swapButton4D {
+            position: absolute;
+            top: 140px; /* 根据需要调整 */
+            left: 80px; /* 根据需要调整 */
+        }
+        #swapButton4E {
+            position: absolute;
+            top: 180px; /* 根据需要调整 */
+            left: 80px; /* 根据需要调整 */
+        }
+        #swapButton5A {
+            position: absolute;
+            top: 20px; /* 根据需要调整 */
+            left: 80px; /* 根据需要调整 */
+        }
+        #swapButton5B {
+            position: absolute;
+            top: 60px; /* 根据需要调整 */
+            left: 80px; /* 根据需要调整 */
+        }
+        #swapButton5C {
+            position: absolute;
+            top: 100px; /* 根据需要调整 */
+            left: 80px; /* 根据需要调整 */
+        }
+        #swapButton5D {
+            position: absolute;
+            top: 140px; /* 根据需要调整 */
+            left: 80px; /* 根据需要调整 */
+        }
+        #swapButton5E {
+            position: absolute;
+            top: 180px; /* 根据需要调整 */
+            left: 80px; /* 根据需要调整 */
+        }
+        #swapButton6A {
+            position: absolute;
+            top: 20px; /* 根据需要调整 */
+            left: 80px; /* 根据需要调整 */
+        }
+        #swapButton6B {
+            position: absolute;
+            top: 60px; /* 根据需要调整 */
+            left: 80px; /* 根据需要调整 */
+        }
+        #swapButton6C {
+            position: absolute;
+            top: 100px; /* 根据需要调整 */
+            left: 80px; /* 根据需要调整 */
+        }
+        #swapButton6D {
+            position: absolute;
+            top: 140px; /* 根据需要调整 */
+            left: 80px; /* 根据需要调整 */
+        }
+        #swapButton6E {
+            position: absolute;
+            top: 180px; /* 根据需要调整 */
+            left: 80px; /* 根据需要调整 */
+        }
+        #swapButton7A {
+            position: absolute;
+            top: 20px; /* 根据需要调整 */
+            left: 80px; /* 根据需要调整 */
+        }
+        #swapButton7B {
+            position: absolute;
+            top: 60px; /* 根据需要调整 */
+            left: 80px; /* 根据需要调整 */
+        }
+        #swapButton7C {
+            position: absolute;
+            top: 100px; /* 根据需要调整 */
+            left: 80px; /* 根据需要调整 */
+        }
+        #swapButton7D {
+            position: absolute;
+            top: 140px; /* 根据需要调整 */
+            left: 80px; /* 根据需要调整 */
+        }
+        #swapButton7E {
+            position: absolute;
+            top: 180px; /* 根据需要调整 */
+            left: 80px; /* 根据需要调整 */
+        }
+        #swapButton8A {
+            position: absolute;
+            top: 20px; /* 根据需要调整 */
+            left: 80px; /* 根据需要调整 */
+        }
+        #swapButton8B {
+            position: absolute;
+            top: 60px; /* 根据需要调整 */
+            left: 80px; /* 根据需要调整 */
+        }
+        #swapButton8C {
+            position: absolute;
+            top: 100px; /* 根据需要调整 */
+            left: 80px; /* 根据需要调整 */
+        }
+        #swapButton8D {
+            position: absolute;
+            top: 140px; /* 根据需要调整 */
+            left: 80px; /* 根据需要调整 */
+        }
+        #swapButton8E {
+            position: absolute;
+            top: 180px; /* 根据需要调整 */
+            left: 80px; /* 根据需要调整 */
+        }
+        #swapButton9A {
+            position: absolute;
+            top: 20px; /* 根据需要调整 */
+            left: 80px; /* 根据需要调整 */
+        }
+        #swapButton9B {
+            position: absolute;
+            top: 60px; /* 根据需要调整 */
+            left: 80px; /* 根据需要调整 */
+        }
+        #swapButton9C {
+            position: absolute;
+            top: 100px; /* 根据需要调整 */
+            left: 80px; /* 根据需要调整 */
+        }
+        #swapButton9D {
+            position: absolute;
+            top: 140px; /* 根据需要调整 */
+            left: 80px; /* 根据需要调整 */
+        }
+        #swapButton9E {
+            position: absolute;
+            top: 180px; /* 根据需要调整 */
+            left: 80px; /* 根据需要调整 */
+        }
+    #swapButton1:hover, #swapButton2:hover, #swapButton3:hover, #swapButton4:hover, #swapButton5:hover, #swapButton6:hover, #swapButton7:hover, #swapButton8:hover, #swapButton9:hover,
+ #swapButton1A:hover, #swapButton1B:hover, #swapButton1C:hover, #swapButton1D:hover, #swapButton1E:hover,
+ #swapButton2A:hover, #swapButton2B:hover, #swapButton2C:hover, #swapButton2D:hover, #swapButton2E:hover,
+ #swapButton3A:hover, #swapButton3B:hover, #swapButton3C:hover, #swapButton3D:hover, #swapButton3E:hover,
+ #swapButton4A:hover, #swapButton4B:hover, #swapButton4C:hover, #swapButton4D:hover, #swapButton4E:hover,
+ #swapButton5A:hover, #swapButton5B:hover, #swapButton5C:hover, #swapButton5D:hover, #swapButton5E:hover,
+ #swapButton6A:hover, #swapButton6B:hover, #swapButton6C:hover, #swapButton6D:hover, #swapButton6E:hover,
+ #swapButton7A:hover, #swapButton7B:hover, #swapButton7C:hover, #swapButton7D:hover, #swapButton7E:hover,
+ #swapButton8A:hover, #swapButton8B:hover, #swapButton8C:hover, #swapButton8D:hover, #swapButton8E:hover,
+ #swapButton9A:hover, #swapButton9B:hover, #swapButton9C:hover, #swapButton9D:hover, #swapButton9E:hover {
+        background-color: #938bff; /* 鼠标悬停时改变背景颜色 */
+    }
+/* 添加一个类来表示按钮被点击后的样式 */
+        .button-active {
+            background-color: #938bff; /* 鼠标悬停时改变背景颜色 */
+        }
+/* 加载界面样式 */
+#loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    z-index: 1000; /* 确保加载界面在最顶层 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; /* 默认垂直排列，可以根据需要调整 */
+}
+
+#loadingImage {
+    position: absolute;
+    top: 40%; /* 设置图片的顶部位置 */
+    left: 50%; /* 设置图片的左侧位置 */
+    transform: translate(-50%, -50%); /* 使图片居中 */
+    height: 40%; /* 根据需要调整图片宽度 */
+    width: auto; /* 保持图片的宽高比 */
+}
+
+#progressBarContainer {
+    position: absolute;
+    top: 70%; /* 设置进度条的顶部位置 */
+    left: 50%; /* 设置进度条的左侧位置 */
+    transform: translate(-50%, -50%); /* 使进度条居中 */
+    width: 60%;
+    height: 25px;
+    background-color: #ddd;
+    border-radius: 12.5px; /* 圆润的圆角 */
+}
+
+#progressBar {
+    width: 0%; /* 初始进度为0% */
+    height: 100%;
+    background-color: #938bff;
+    text-align: center;
+    line-height: 25px; /* 使文字垂直居中 */
+    color: white;
+    border-radius: 12.5px; /* 圆润的圆角 */
+}
+/* 顶部说明文字 */
+  .positioned-text {
+    position: absolute;
+    top: -8px; /* 从顶部向下偏移50% */
+    left: 150px; /* 从左侧向右偏移50% */
+    font-weight: bold; /* 加粗文字 */
+    font-size: 25px; /* 调节字号 */
+    color: #938bff; /* 调节颜色 */
+  }
+
+    </style>
+</head>
+<body>
+<div id="loading">
+	<img src="logo.jpg" alt="Loading..." id="loadingImage">
+        <div id="progressBarContainer">
+            <div id="progressBar">0%</div>
+        </div>
+    </div>
+    <div id="modelBox1">
+       <model-viewer id="mv1" disable-tap touch-action="pan-y" src="钢质单开门.glb" camera-controls tone-mapping="neutral" poster="1.gif" shadow-intensity="1" min-camera-orbit="-45deg 45deg 300m" max-camera-orbit="45deg 97deg 500m" camera-target="0m 0m 0m" camera-orbit="-45deg 90deg 9534m" field-of-view="30deg" environment-image="autumn_field_puresky_1k.hdr" skybox-image="autumn_field_puresky_1k.hdr" exposure="1">
+</model-viewer>
+    <button id="swapButton1A" class="button-active">A</button>
+    <button id="swapButton1B">B</button>
+    <button id="swapButton1C">C</button>
+    <button id="swapButton1D">D</button>
+    <button id="swapButton1E">E</button>
+<p class="positioned-text">Steel single door</p>
+    </div>
+    <div id="modelBox2">
+       <model-viewer id="mv2" disable-tap touch-action="pan-y" src="钢质双开门.glb" camera-controls tone-mapping="neutral" poster="1.gif" shadow-intensity="1" min-camera-orbit="-45deg 45deg 300m" max-camera-orbit="45deg 97deg 500m" camera-target="0m 0m 0m" camera-orbit="-45deg 90deg 9534m" field-of-view="30deg" environment-image="autumn_field_puresky_1k.hdr" skybox-image="autumn_field_puresky_1k.hdr" exposure="1">
+        </model-viewer>
+    <button id="swapButton2A" class="button-active">A</button>
+    <button id="swapButton2B">B</button>
+    <button id="swapButton2C">C</button>
+    <button id="swapButton2D">D</button>
+    <button id="swapButton2E">E</button>
+<p class="positioned-text">Steel double door</p>
+    </div>
+<div id="modelBox3">
+       <model-viewer id="mv3" disable-tap touch-action="pan-y" src="钢质子母门.glb" ar ar-modes="webxr scene-viewer quick-look" camera-controls tone-mapping="neutral" poster="1.gif" shadow-intensity="1" min-camera-orbit="-45deg 45deg 300m" max-camera-orbit="45deg 97deg 500m" camera-target="-15m 0m 0m" camera-orbit="-45deg 90deg 9534m" field-of-view="30deg" environment-image="autumn_field_puresky_1k.hdr" skybox-image="autumn_field_puresky_1k.hdr" exposure="1">
+</model-viewer>
+    <button id="swapButton3A" class="button-active">A</button>
+    <button id="swapButton3B">B</button>
+    <button id="swapButton3C">C</button>
+    <button id="swapButton3D">D</button>
+    <button id="swapButton3E">E</button>
+<p class="positioned-text">Steel unequal double door</p>
+    </div>
+    <div id="modelBox4">
+       <model-viewer id="mv4" disable-tap touch-action="pan-y" src="木质单开门.glb" ar ar-modes="webxr scene-viewer quick-look" camera-controls tone-mapping="neutral" poster="1.gif" shadow-intensity="1" min-camera-orbit="-45deg 45deg 300m" max-camera-orbit="45deg 97deg 500m" camera-target="0m 0m -80m" camera-orbit="-45deg 90deg 9534m" field-of-view="30deg" environment-image="autumn_field_puresky_1k.hdr" skybox-image="autumn_field_puresky_1k.hdr" exposure="1">
+</model-viewer>
+    <button id="swapButton4A" class="button-active">A</button>
+    <button id="swapButton4B">B</button>
+    <button id="swapButton4C">C</button>
+    <button id="swapButton4D">D</button>
+    <button id="swapButton4E">E</button>
+<p class="positioned-text">Wooden single door</p>
+    </div>
+    <div id="modelBox5">
+       <model-viewer id="mv5" disable-tap touch-action="pan-y" src="木质双开门.glb" ar ar-modes="webxr scene-viewer quick-look" camera-controls tone-mapping="neutral" poster="1.gif" shadow-intensity="1" min-camera-orbit="-45deg 45deg 300m" max-camera-orbit="45deg 97deg 500m" camera-target="0m 0m -80m" camera-orbit="-45deg 90deg 9534m" field-of-view="30deg" environment-image="autumn_field_puresky_1k.hdr" skybox-image="autumn_field_puresky_1k.hdr" exposure="1">
+</model-viewer>
+    <button id="swapButton5A" class="button-active">A</button>
+    <button id="swapButton5B">B</button>
+    <button id="swapButton5C">C</button>
+    <button id="swapButton5D">D</button>
+    <button id="swapButton5E">E</button>
+<p class="positioned-text">Wooden double door</p>
+    </div>
+    <div id="modelBox6">
+       <model-viewer id="mv6" disable-tap touch-action="pan-y" src="木质子母门.glb" ar ar-modes="webxr scene-viewer quick-look" camera-controls tone-mapping="neutral" poster="1.gif" shadow-intensity="1" min-camera-orbit="-45deg 45deg 300m" max-camera-orbit="45deg 97deg 500m" camera-target="0m 0m -80m" camera-orbit="-45deg 90deg 9534m" field-of-view="30deg" environment-image="autumn_field_puresky_1k.hdr" skybox-image="autumn_field_puresky_1k.hdr" exposure="1">
+</model-viewer>
+    <button id="swapButton6A" class="button-active">A</button>
+    <button id="swapButton6B">B</button>
+    <button id="swapButton6C">C</button>
+    <button id="swapButton6D">D</button>
+    <button id="swapButton6E">E</button>
+<p class="positioned-text">Wooden unequal double door</p>
+    </div>
+    <div id="modelBox7">
+       <model-viewer id="mv7" disable-tap touch-action="pan-y" src="钢木单开门.glb" ar ar-modes="webxr scene-viewer quick-look" camera-controls tone-mapping="neutral" poster="1.gif" shadow-intensity="1" min-camera-orbit="-45deg 45deg 300m" max-camera-orbit="45deg 97deg 500m" camera-target="0m 0m 0m" camera-orbit="-45deg 90deg 9534m" field-of-view="30deg" environment-image="autumn_field_puresky_1k.hdr" skybox-image="autumn_field_puresky_1k.hdr" exposure="1">
+</model-viewer>
+    <button id="swapButton7A" class="button-active">A</button>
+    <button id="swapButton7B">B</button>
+    <button id="swapButton7C">C</button>
+    <button id="swapButton7D">D</button>
+    <button id="swapButton7E">E</button>
+<p class="positioned-text">Steel-framed wooden fan single door</p>
+    </div>
+    <div id="modelBox8">
+       <model-viewer id="mv8" disable-tap touch-action="pan-y" src="钢木双开门.glb" ar ar-modes="webxr scene-viewer quick-look" camera-controls tone-mapping="neutral" poster="1.gif" shadow-intensity="1" min-camera-orbit="-45deg 45deg 300m" max-camera-orbit="45deg 97deg 500m" camera-target="0m 0m 0m" camera-orbit="-45deg 90deg 9534m" field-of-view="30deg" environment-image="autumn_field_puresky_1k.hdr" skybox-image="autumn_field_puresky_1k.hdr" exposure="1">
+</model-viewer>
+    <button id="swapButton8A" class="button-active">A</button>
+    <button id="swapButton8B">B</button>
+    <button id="swapButton8C">C</button>
+    <button id="swapButton8D">D</button>
+    <button id="swapButton8E">E</button>
+<p class="positioned-text">Steel-framed wooden fan double door</p>
+    </div>
+    <div id="modelBox9">
+       <model-viewer id="mv9" disable-tap touch-action="pan-y" src="钢木子母门.glb" ar ar-modes="webxr scene-viewer quick-look" camera-controls tone-mapping="neutral" poster="1.gif" shadow-intensity="1" min-camera-orbit="-45deg 45deg 300m" max-camera-orbit="45deg 97deg 500m" camera-target="0m 0m 0m" camera-orbit="-45deg 90deg 9534m" field-of-view="30deg" environment-image="autumn_field_puresky_1k.hdr" skybox-image="autumn_field_puresky_1k.hdr" exposure="1">
+</model-viewer>
+    <button id="swapButton9A" class="button-active">A</button>
+    <button id="swapButton9B">B</button>
+    <button id="swapButton9C">C</button>
+    <button id="swapButton9D">D</button>
+    <button id="swapButton9E">E</button>
+<p class="positioned-text">Steel-framed wooden fan unequal double door</p>
+    </div>
+
+    <button id="swapButton1" class="button-active">1</button>
+    <button id="swapButton2">2</button>
+    <button id="swapButton3">3</button>
+    <button id="swapButton4">4</button>
+    <button id="swapButton5">5</button>
+    <button id="swapButton6">6</button>
+    <button id="swapButton7">7</button>
+    <button id="swapButton8">8</button>
+    <button id="swapButton9">9</button>
+
+<script>
+// 切换场景
+    document.getElementById('swapButton1').addEventListener('click', function() {
+        document.getElementById('modelBox1').style.zIndex = 1;
+        document.getElementById('modelBox2').style.zIndex = 0;
+        document.getElementById('modelBox3').style.zIndex = 0;
+        document.getElementById('modelBox4').style.zIndex = 0;
+        document.getElementById('modelBox5').style.zIndex = 0;
+        document.getElementById('modelBox6').style.zIndex = 0;
+        document.getElementById('modelBox7').style.zIndex = 0;
+        document.getElementById('modelBox8').style.zIndex = 0;
+        document.getElementById('modelBox9').style.zIndex = 0;
+    });
+    document.getElementById('swapButton2').addEventListener('click', function() {
+        document.getElementById('modelBox1').style.zIndex = 0;
+        document.getElementById('modelBox2').style.zIndex = 1;
+        document.getElementById('modelBox3').style.zIndex = 0;
+        document.getElementById('modelBox4').style.zIndex = 0;
+        document.getElementById('modelBox5').style.zIndex = 0;
+        document.getElementById('modelBox6').style.zIndex = 0;
+        document.getElementById('modelBox7').style.zIndex = 0;
+        document.getElementById('modelBox8').style.zIndex = 0;
+        document.getElementById('modelBox9').style.zIndex = 0;
+    });
+    document.getElementById('swapButton3').addEventListener('click', function() {
+        document.getElementById('modelBox1').style.zIndex = 0;
+        document.getElementById('modelBox2').style.zIndex = 0;
+        document.getElementById('modelBox3').style.zIndex = 1;
+        document.getElementById('modelBox4').style.zIndex = 0;
+        document.getElementById('modelBox5').style.zIndex = 0;
+        document.getElementById('modelBox6').style.zIndex = 0;
+        document.getElementById('modelBox7').style.zIndex = 0;
+        document.getElementById('modelBox8').style.zIndex = 0;
+        document.getElementById('modelBox9').style.zIndex = 0;
+    });
+    document.getElementById('swapButton4').addEventListener('click', function() {
+        document.getElementById('modelBox1').style.zIndex = 0;
+        document.getElementById('modelBox2').style.zIndex = 0;
+        document.getElementById('modelBox3').style.zIndex = 0;
+        document.getElementById('modelBox4').style.zIndex = 1;
+        document.getElementById('modelBox5').style.zIndex = 0;
+        document.getElementById('modelBox6').style.zIndex = 0;
+        document.getElementById('modelBox7').style.zIndex = 0;
+        document.getElementById('modelBox8').style.zIndex = 0;
+        document.getElementById('modelBox9').style.zIndex = 0;
+    });
+    document.getElementById('swapButton5').addEventListener('click', function() {
+        document.getElementById('modelBox1').style.zIndex = 0;
+        document.getElementById('modelBox2').style.zIndex = 0;
+        document.getElementById('modelBox3').style.zIndex = 0;
+        document.getElementById('modelBox4').style.zIndex = 0;
+        document.getElementById('modelBox5').style.zIndex = 1;
+        document.getElementById('modelBox6').style.zIndex = 0;
+        document.getElementById('modelBox7').style.zIndex = 0;
+        document.getElementById('modelBox8').style.zIndex = 0;
+        document.getElementById('modelBox9').style.zIndex = 0;
+    });
+    document.getElementById('swapButton6').addEventListener('click', function() {
+        document.getElementById('modelBox1').style.zIndex = 0;
+        document.getElementById('modelBox2').style.zIndex = 0;
+        document.getElementById('modelBox3').style.zIndex = 0;
+        document.getElementById('modelBox4').style.zIndex = 0;
+        document.getElementById('modelBox5').style.zIndex = 0;
+        document.getElementById('modelBox6').style.zIndex = 1;
+        document.getElementById('modelBox7').style.zIndex = 0;
+        document.getElementById('modelBox8').style.zIndex = 0;
+        document.getElementById('modelBox9').style.zIndex = 0;
+    });
+    document.getElementById('swapButton7').addEventListener('click', function() {
+        document.getElementById('modelBox1').style.zIndex = 0;
+        document.getElementById('modelBox2').style.zIndex = 0;
+        document.getElementById('modelBox3').style.zIndex = 0;
+        document.getElementById('modelBox4').style.zIndex = 0;
+        document.getElementById('modelBox5').style.zIndex = 0;
+        document.getElementById('modelBox6').style.zIndex = 0;
+        document.getElementById('modelBox7').style.zIndex = 1;
+        document.getElementById('modelBox8').style.zIndex = 0;
+        document.getElementById('modelBox9').style.zIndex = 0;
+    });
+    document.getElementById('swapButton8').addEventListener('click', function() {
+        document.getElementById('modelBox1').style.zIndex = 0;
+        document.getElementById('modelBox2').style.zIndex = 0;
+        document.getElementById('modelBox3').style.zIndex = 0;
+        document.getElementById('modelBox4').style.zIndex = 0;
+        document.getElementById('modelBox5').style.zIndex = 0;
+        document.getElementById('modelBox6').style.zIndex = 0;
+        document.getElementById('modelBox7').style.zIndex = 0;
+        document.getElementById('modelBox8').style.zIndex = 1;
+        document.getElementById('modelBox9').style.zIndex = 0;
+    });
+    document.getElementById('swapButton9').addEventListener('click', function() {
+        document.getElementById('modelBox1').style.zIndex = 0;
+        document.getElementById('modelBox2').style.zIndex = 0;
+        document.getElementById('modelBox3').style.zIndex = 0;
+        document.getElementById('modelBox4').style.zIndex = 0;
+        document.getElementById('modelBox5').style.zIndex = 0;
+        document.getElementById('modelBox6').style.zIndex = 0;
+        document.getElementById('modelBox7').style.zIndex = 0;
+        document.getElementById('modelBox8').style.zIndex = 0;
+        document.getElementById('modelBox9').style.zIndex = 1;
+    });
+// 获取模型查看器元素
+        var modelViewer = document.getElementById('mv1');
+        var progressBar = document.getElementById('progressBar');
+
+        // 监听模型加载进度事件
+        modelViewer.addEventListener('progress', function(event) {
+            // 更新进度条
+            var progress = event.detail.totalProgress * 100; // 获取加载进度
+            progressBar.style.width = progress + '%';
+            progressBar.textContent = Math.round(progress) + '%';
+        });
+
+        // 监听模型加载完成事件
+        modelViewer.addEventListener('load', function() {
+            // 模拟加载完成后的1秒停顿
+            setTimeout(function() {
+                document.getElementById('loading').style.display = 'none'; // 隐藏加载界面
+            }, 1000);
+        });
+//切换贴图
+        document.getElementById('swapButton1A').addEventListener('click', () => {
+            const model = document.getElementById('mv1'); // 使用正确的 ID
+            model.variantName = '1'; // 确保这是正确的材质变体名称
+        });
+        document.getElementById('swapButton1B').addEventListener('click', () => {
+            const model = document.getElementById('mv1'); // 使用正确的 ID
+            model.variantName = '2'; // 确保这是正确的材质变体名称
+        });
+        document.getElementById('swapButton1C').addEventListener('click', () => {
+            const model = document.getElementById('mv1'); // 使用正确的 ID
+            model.variantName = '3'; // 确保这是正确的材质变体名称
+        });
+        document.getElementById('swapButton1D').addEventListener('click', () => {
+            const model = document.getElementById('mv1'); // 使用正确的 ID
+            model.variantName = '4'; // 确保这是正确的材质变体名称
+        });
+        document.getElementById('swapButton1E').addEventListener('click', () => {
+            const model = document.getElementById('mv1'); // 使用正确的 ID
+            model.variantName = '5'; // 确保这是正确的材质变体名称
+        });
+        document.getElementById('swapButton2A').addEventListener('click', () => {
+            const model = document.getElementById('mv2'); // 使用正确的 ID
+            model.variantName = '1'; // 确保这是正确的材质变体名称
+        });
+        document.getElementById('swapButton2B').addEventListener('click', () => {
+            const model = document.getElementById('mv2'); // 使用正确的 ID
+            model.variantName = '2'; // 确保这是正确的材质变体名称
+        });
+        document.getElementById('swapButton2C').addEventListener('click', () => {
+            const model = document.getElementById('mv2'); // 使用正确的 ID
+            model.variantName = '3'; // 确保这是正确的材质变体名称
+        });
+        document.getElementById('swapButton2D').addEventListener('click', () => {
+            const model = document.getElementById('mv2'); // 使用正确的 ID
+            model.variantName = '4'; // 确保这是正确的材质变体名称
+        });
+        document.getElementById('swapButton2E').addEventListener('click', () => {
+            const model = document.getElementById('mv2'); // 使用正确的 ID
+            model.variantName = '5'; // 确保这是正确的材质变体名称
+        });
+        document.getElementById('swapButton3A').addEventListener('click', () => {
+            const model = document.getElementById('mv3'); // 使用正确的 ID
+            model.variantName = '1'; // 确保这是正确的材质变体名称
+        });
+        document.getElementById('swapButton3B').addEventListener('click', () => {
+            const model = document.getElementById('mv3'); // 使用正确的 ID
+            model.variantName = '2'; // 确保这是正确的材质变体名称
+        });
+        document.getElementById('swapButton3C').addEventListener('click', () => {
+            const model = document.getElementById('mv3'); // 使用正确的 ID
+            model.variantName = '3'; // 确保这是正确的材质变体名称
+        });
+        document.getElementById('swapButton3D').addEventListener('click', () => {
+            const model = document.getElementById('mv3'); // 使用正确的 ID
+            model.variantName = '4'; // 确保这是正确的材质变体名称
+        });
+        document.getElementById('swapButton3E').addEventListener('click', () => {
+            const model = document.getElementById('mv3'); // 使用正确的 ID
+            model.variantName = '5'; // 确保这是正确的材质变体名称
+        });
+        document.getElementById('swapButton4A').addEventListener('click', () => {
+            const model = document.getElementById('mv4'); // 使用正确的 ID
+            model.variantName = '1'; // 确保这是正确的材质变体名称
+        });
+        document.getElementById('swapButton4B').addEventListener('click', () => {
+            const model = document.getElementById('mv4'); // 使用正确的 ID
+            model.variantName = '2'; // 确保这是正确的材质变体名称
+        });
+        document.getElementById('swapButton4C').addEventListener('click', () => {
+            const model = document.getElementById('mv4'); // 使用正确的 ID
+            model.variantName = '3'; // 确保这是正确的材质变体名称
+        });
+        document.getElementById('swapButton4D').addEventListener('click', () => {
+            const model = document.getElementById('mv4'); // 使用正确的 ID
+            model.variantName = '4'; // 确保这是正确的材质变体名称
+        });
+        document.getElementById('swapButton4E').addEventListener('click', () => {
+            const model = document.getElementById('mv4'); // 使用正确的 ID
+            model.variantName = '5'; // 确保这是正确的材质变体名称
+        });
+        document.getElementById('swapButton5A').addEventListener('click', () => {
+            const model = document.getElementById('mv5'); // 使用正确的 ID
+            model.variantName = '1'; // 确保这是正确的材质变体名称
+        });
+        document.getElementById('swapButton5B').addEventListener('click', () => {
+            const model = document.getElementById('mv5'); // 使用正确的 ID
+            model.variantName = '2'; // 确保这是正确的材质变体名称
+        });
+        document.getElementById('swapButton5C').addEventListener('click', () => {
+            const model = document.getElementById('mv5'); // 使用正确的 ID
+            model.variantName = '3'; // 确保这是正确的材质变体名称
+        });
+        document.getElementById('swapButton5D').addEventListener('click', () => {
+            const model = document.getElementById('mv5'); // 使用正确的 ID
+            model.variantName = '4'; // 确保这是正确的材质变体名称
+        });
+        document.getElementById('swapButton5E').addEventListener('click', () => {
+            const model = document.getElementById('mv5'); // 使用正确的 ID
+            model.variantName = '5'; // 确保这是正确的材质变体名称
+        });
+        document.getElementById('swapButton6A').addEventListener('click', () => {
+            const model = document.getElementById('mv6'); // 使用正确的 ID
+            model.variantName = '1'; // 确保这是正确的材质变体名称
+        });
+        document.getElementById('swapButton6B').addEventListener('click', () => {
+            const model = document.getElementById('mv6'); // 使用正确的 ID
+            model.variantName = '2'; // 确保这是正确的材质变体名称
+        });
+        document.getElementById('swapButton6C').addEventListener('click', () => {
+            const model = document.getElementById('mv6'); // 使用正确的 ID
+            model.variantName = '3'; // 确保这是正确的材质变体名称
+        });
+        document.getElementById('swapButton6D').addEventListener('click', () => {
+            const model = document.getElementById('mv6'); // 使用正确的 ID
+            model.variantName = '4'; // 确保这是正确的材质变体名称
+        });
+        document.getElementById('swapButton6E').addEventListener('click', () => {
+            const model = document.getElementById('mv6'); // 使用正确的 ID
+            model.variantName = '5'; // 确保这是正确的材质变体名称
+        });
+        document.getElementById('swapButton7A').addEventListener('click', () => {
+            const model = document.getElementById('mv7'); // 使用正确的 ID
+            model.variantName = '1'; // 确保这是正确的材质变体名称
+        });
+        document.getElementById('swapButton7B').addEventListener('click', () => {
+            const model = document.getElementById('mv7'); // 使用正确的 ID
+            model.variantName = '2'; // 确保这是正确的材质变体名称
+        });
+        document.getElementById('swapButton7C').addEventListener('click', () => {
+            const model = document.getElementById('mv7'); // 使用正确的 ID
+            model.variantName = '3'; // 确保这是正确的材质变体名称
+        });
+        document.getElementById('swapButton7D').addEventListener('click', () => {
+            const model = document.getElementById('mv7'); // 使用正确的 ID
+            model.variantName = '4'; // 确保这是正确的材质变体名称
+        });
+        document.getElementById('swapButton7E').addEventListener('click', () => {
+            const model = document.getElementById('mv7'); // 使用正确的 ID
+            model.variantName = '5'; // 确保这是正确的材质变体名称
+        });
+        document.getElementById('swapButton8A').addEventListener('click', () => {
+            const model = document.getElementById('mv8'); // 使用正确的 ID
+            model.variantName = '1'; // 确保这是正确的材质变体名称
+        });
+        document.getElementById('swapButton8B').addEventListener('click', () => {
+            const model = document.getElementById('mv8'); // 使用正确的 ID
+            model.variantName = '2'; // 确保这是正确的材质变体名称
+        });
+        document.getElementById('swapButton8C').addEventListener('click', () => {
+            const model = document.getElementById('mv8'); // 使用正确的 ID
+            model.variantName = '3'; // 确保这是正确的材质变体名称
+        });
+        document.getElementById('swapButton8D').addEventListener('click', () => {
+            const model = document.getElementById('mv8'); // 使用正确的 ID
+            model.variantName = '4'; // 确保这是正确的材质变体名称
+        });
+        document.getElementById('swapButton8E').addEventListener('click', () => {
+            const model = document.getElementById('mv8'); // 使用正确的 ID
+            model.variantName = '5'; // 确保这是正确的材质变体名称
+        });
+        document.getElementById('swapButton9A').addEventListener('click', () => {
+            const model = document.getElementById('mv9'); // 使用正确的 ID
+            model.variantName = '1'; // 确保这是正确的材质变体名称
+        });
+        document.getElementById('swapButton9B').addEventListener('click', () => {
+            const model = document.getElementById('mv9'); // 使用正确的 ID
+            model.variantName = '2'; // 确保这是正确的材质变体名称
+        });
+        document.getElementById('swapButton9C').addEventListener('click', () => {
+            const model = document.getElementById('mv9'); // 使用正确的 ID
+            model.variantName = '3'; // 确保这是正确的材质变体名称
+        });
+        document.getElementById('swapButton9D').addEventListener('click', () => {
+            const model = document.getElementById('mv9'); // 使用正确的 ID
+            model.variantName = '4'; // 确保这是正确的材质变体名称
+        });
+        document.getElementById('swapButton9E').addEventListener('click', () => {
+            const model = document.getElementById('mv9'); // 使用正确的 ID
+            model.variantName = '5'; // 确保这是正确的材质变体名称
+        });
+// 添加一个变量来跟踪当前激活的按钮
+        let activeButton = document.getElementById('swapButton1');
+        let activeButton1 = document.getElementById('swapButton1A');
+        let activeButton2 = document.getElementById('swapButton2A');
+        let activeButton3 = document.getElementById('swapButton3A');
+        let activeButton4 = document.getElementById('swapButton4A');
+        let activeButton5 = document.getElementById('swapButton5A');
+        let activeButton6 = document.getElementById('swapButton6A');
+        let activeButton7 = document.getElementById('swapButton7A');
+        let activeButton8 = document.getElementById('swapButton8A');
+        let activeButton9 = document.getElementById('swapButton9A');
+// 修改按钮点击事件，添加对 .button-active 类的切换
+        document.getElementById('swapButton1').addEventListener('click', function() {
+            // ... 其他代码保持不变 ...
+            // 移除之前按钮的激活状态
+            if (activeButton) {
+                activeButton.classList.remove('button-active');
+            }
+            // 设置当前按钮为激活状态
+            this.classList.add('button-active');
+            activeButton = this;
+        });
+        document.getElementById('swapButton2').addEventListener('click', function() {
+            // ... 其他代码保持不变 ...
+            // 移除之前按钮的激活状态
+            if (activeButton) {
+                activeButton.classList.remove('button-active');
+            }
+            // 设置当前按钮为激活状态
+            this.classList.add('button-active');
+            activeButton = this;
+        });
+        document.getElementById('swapButton3').addEventListener('click', function() {
+            // ... 其他代码保持不变 ...
+            // 移除之前按钮的激活状态
+            if (activeButton) {
+                activeButton.classList.remove('button-active');
+            }
+            // 设置当前按钮为激活状态
+            this.classList.add('button-active');
+            activeButton = this;
+        });
+        document.getElementById('swapButton4').addEventListener('click', function() {
+            // ... 其他代码保持不变 ...
+            // 移除之前按钮的激活状态
+            if (activeButton) {
+                activeButton.classList.remove('button-active');
+            }
+            // 设置当前按钮为激活状态
+            this.classList.add('button-active');
+            activeButton = this;
+        });
+        document.getElementById('swapButton5').addEventListener('click', function() {
+            // ... 其他代码保持不变 ...
+            // 移除之前按钮的激活状态
+            if (activeButton) {
+                activeButton.classList.remove('button-active');
+            }
+            // 设置当前按钮为激活状态
+            this.classList.add('button-active');
+            activeButton = this;
+        });
+        document.getElementById('swapButton6').addEventListener('click', function() {
+            // ... 其他代码保持不变 ...
+            // 移除之前按钮的激活状态
+            if (activeButton) {
+                activeButton.classList.remove('button-active');
+            }
+            // 设置当前按钮为激活状态
+            this.classList.add('button-active');
+            activeButton = this;
+        });
+        document.getElementById('swapButton7').addEventListener('click', function() {
+            // ... 其他代码保持不变 ...
+            // 移除之前按钮的激活状态
+            if (activeButton) {
+                activeButton.classList.remove('button-active');
+            }
+            // 设置当前按钮为激活状态
+            this.classList.add('button-active');
+            activeButton = this;
+        });
+        document.getElementById('swapButton8').addEventListener('click', function() {
+            // ... 其他代码保持不变 ...
+            // 移除之前按钮的激活状态
+            if (activeButton) {
+                activeButton.classList.remove('button-active');
+            }
+            // 设置当前按钮为激活状态
+            this.classList.add('button-active');
+            activeButton = this;
+        });
+        document.getElementById('swapButton9').addEventListener('click', function() {
+            // ... 其他代码保持不变 ...
+            // 移除之前按钮的激活状态
+            if (activeButton) {
+                activeButton.classList.remove('button-active');
+            }
+            // 设置当前按钮为激活状态
+            this.classList.add('button-active');
+            activeButton = this;
+        });
+        document.getElementById('swapButton1A').addEventListener('click', function() {
+            // ... 其他代码保持不变 ...
+            // 移除之前按钮的激活状态
+            if (activeButton1) {
+                activeButton1.classList.remove('button-active');
+            }
+            // 设置当前按钮为激活状态
+            this.classList.add('button-active');
+            activeButton1 = this;
+        });
+        document.getElementById('swapButton1B').addEventListener('click', function() {
+            // ... 其他代码保持不变 ...
+            // 移除之前按钮的激活状态
+            if (activeButton1) {
+                activeButton1.classList.remove('button-active');
+            }
+            // 设置当前按钮为激活状态
+            this.classList.add('button-active');
+            activeButton1 = this;
+        });
+        document.getElementById('swapButton1C').addEventListener('click', function() {
+            // ... 其他代码保持不变 ...
+            // 移除之前按钮的激活状态
+            if (activeButton1) {
+                activeButton1.classList.remove('button-active');
+            }
+            // 设置当前按钮为激活状态
+            this.classList.add('button-active');
+            activeButton1 = this;
+        });
+        document.getElementById('swapButton1D').addEventListener('click', function() {
+            // ... 其他代码保持不变 ...
+            // 移除之前按钮的激活状态
+            if (activeButton1) {
+                activeButton1.classList.remove('button-active');
+            }
+            // 设置当前按钮为激活状态
+            this.classList.add('button-active');
+            activeButton1 = this;
+        });
+        document.getElementById('swapButton1E').addEventListener('click', function() {
+            // ... 其他代码保持不变 ...
+            // 移除之前按钮的激活状态
+            if (activeButton1) {
+                activeButton1.classList.remove('button-active');
+            }
+            // 设置当前按钮为激活状态
+            this.classList.add('button-active');
+            activeButton1 = this;
+        });
+        document.getElementById('swapButton2A').addEventListener('click', function() {
+            // ... 其他代码保持不变 ...
+            // 移除之前按钮的激活状态
+            if (activeButton2) {
+                activeButton2.classList.remove('button-active');
+            }
+            // 设置当前按钮为激活状态
+            this.classList.add('button-active');
+            activeButton2 = this;
+        });
+        document.getElementById('swapButton2B').addEventListener('click', function() {
+            // ... 其他代码保持不变 ...
+            // 移除之前按钮的激活状态
+            if (activeButton2) {
+                activeButton2.classList.remove('button-active');
+            }
+            // 设置当前按钮为激活状态
+            this.classList.add('button-active');
+            activeButton2 = this;
+        });
+        document.getElementById('swapButton2C').addEventListener('click', function() {
+            // ... 其他代码保持不变 ...
+            // 移除之前按钮的激活状态
+            if (activeButton2) {
+                activeButton2.classList.remove('button-active');
+            }
+            // 设置当前按钮为激活状态
+            this.classList.add('button-active');
+            activeButton2 = this;
+        });
+        document.getElementById('swapButton2D').addEventListener('click', function() {
+            // ... 其他代码保持不变 ...
+            // 移除之前按钮的激活状态
+            if (activeButton2) {
+                activeButton2.classList.remove('button-active');
+            }
+            // 设置当前按钮为激活状态
+            this.classList.add('button-active');
+            activeButton2 = this;
+        });
+        document.getElementById('swapButton2E').addEventListener('click', function() {
+            // ... 其他代码保持不变 ...
+            // 移除之前按钮的激活状态
+            if (activeButton2) {
+                activeButton2.classList.remove('button-active');
+            }
+            // 设置当前按钮为激活状态
+            this.classList.add('button-active');
+            activeButton2 = this;
+        });
+        document.getElementById('swapButton3A').addEventListener('click', function() {
+            // ... 其他代码保持不变 ...
+            // 移除之前按钮的激活状态
+            if (activeButton3) {
+                activeButton3.classList.remove('button-active');
+            }
+            // 设置当前按钮为激活状态
+            this.classList.add('button-active');
+            activeButton3 = this;
+        });
+        document.getElementById('swapButton3B').addEventListener('click', function() {
+            // ... 其他代码保持不变 ...
+            // 移除之前按钮的激活状态
+            if (activeButton3) {
+                activeButton3.classList.remove('button-active');
+            }
+            // 设置当前按钮为激活状态
+            this.classList.add('button-active');
+            activeButton3 = this;
+        });
+        document.getElementById('swapButton3C').addEventListener('click', function() {
+            // ... 其他代码保持不变 ...
+            // 移除之前按钮的激活状态
+            if (activeButton3) {
+                activeButton3.classList.remove('button-active');
+            }
+            // 设置当前按钮为激活状态
+            this.classList.add('button-active');
+            activeButton3 = this;
+        });
+        document.getElementById('swapButton3D').addEventListener('click', function() {
+            // ... 其他代码保持不变 ...
+            // 移除之前按钮的激活状态
+            if (activeButton3) {
+                activeButton3.classList.remove('button-active');
+            }
+            // 设置当前按钮为激活状态
+            this.classList.add('button-active');
+            activeButton3 = this;
+        });
+        document.getElementById('swapButton3E').addEventListener('click', function() {
+            // ... 其他代码保持不变 ...
+            // 移除之前按钮的激活状态
+            if (activeButton3) {
+                activeButton3.classList.remove('button-active');
+            }
+            // 设置当前按钮为激活状态
+            this.classList.add('button-active');
+            activeButton3 = this;
+        });
+        document.getElementById('swapButton4A').addEventListener('click', function() {
+            // ... 其他代码保持不变 ...
+            // 移除之前按钮的激活状态
+            if (activeButton4) {
+                activeButton4.classList.remove('button-active');
+            }
+            // 设置当前按钮为激活状态
+            this.classList.add('button-active');
+            activeButton4 = this;
+        });
+        document.getElementById('swapButton4B').addEventListener('click', function() {
+            // ... 其他代码保持不变 ...
+            // 移除之前按钮的激活状态
+            if (activeButton4) {
+                activeButton4.classList.remove('button-active');
+            }
+            // 设置当前按钮为激活状态
+            this.classList.add('button-active');
+            activeButton4 = this;
+        });
+        document.getElementById('swapButton4C').addEventListener('click', function() {
+            // ... 其他代码保持不变 ...
+            // 移除之前按钮的激活状态
+            if (activeButton4) {
+                activeButton4.classList.remove('button-active');
+            }
+            // 设置当前按钮为激活状态
+            this.classList.add('button-active');
+            activeButton4 = this;
+        });
+        document.getElementById('swapButton4D').addEventListener('click', function() {
+            // ... 其他代码保持不变 ...
+            // 移除之前按钮的激活状态
+            if (activeButton4) {
+                activeButton4.classList.remove('button-active');
+            }
+            // 设置当前按钮为激活状态
+            this.classList.add('button-active');
+            activeButton4 = this;
+        });
+        document.getElementById('swapButton4E').addEventListener('click', function() {
+            // ... 其他代码保持不变 ...
+            // 移除之前按钮的激活状态
+            if (activeButton4) {
+                activeButton4.classList.remove('button-active');
+            }
+            // 设置当前按钮为激活状态
+            this.classList.add('button-active');
+            activeButton4 = this;
+        });
+        document.getElementById('swapButton5A').addEventListener('click', function() {
+            // ... 其他代码保持不变 ...
+            // 移除之前按钮的激活状态
+            if (activeButton5) {
+                activeButton5.classList.remove('button-active');
+            }
+            // 设置当前按钮为激活状态
+            this.classList.add('button-active');
+            activeButton5 = this;
+        });
+        document.getElementById('swapButton5B').addEventListener('click', function() {
+            // ... 其他代码保持不变 ...
+            // 移除之前按钮的激活状态
+            if (activeButton5) {
+                activeButton5.classList.remove('button-active');
+            }
+            // 设置当前按钮为激活状态
+            this.classList.add('button-active');
+            activeButton5 = this;
+        });
+        document.getElementById('swapButton5C').addEventListener('click', function() {
+            // ... 其他代码保持不变 ...
+            // 移除之前按钮的激活状态
+            if (activeButton5) {
+                activeButton5.classList.remove('button-active');
+            }
+            // 设置当前按钮为激活状态
+            this.classList.add('button-active');
+            activeButton5 = this;
+        });
+        document.getElementById('swapButton5D').addEventListener('click', function() {
+            // ... 其他代码保持不变 ...
+            // 移除之前按钮的激活状态
+            if (activeButton5) {
+                activeButton5.classList.remove('button-active');
+            }
+            // 设置当前按钮为激活状态
+            this.classList.add('button-active');
+            activeButton5 = this;
+        });
+        document.getElementById('swapButton5E').addEventListener('click', function() {
+            // ... 其他代码保持不变 ...
+            // 移除之前按钮的激活状态
+            if (activeButton5) {
+                activeButton5.classList.remove('button-active');
+            }
+            // 设置当前按钮为激活状态
+            this.classList.add('button-active');
+            activeButton5 = this;
+        });
+        document.getElementById('swapButton6A').addEventListener('click', function() {
+            // ... 其他代码保持不变 ...
+            // 移除之前按钮的激活状态
+            if (activeButton6) {
+                activeButton6.classList.remove('button-active');
+            }
+            // 设置当前按钮为激活状态
+            this.classList.add('button-active');
+            activeButton6 = this;
+        });
+        document.getElementById('swapButton6B').addEventListener('click', function() {
+            // ... 其他代码保持不变 ...
+            // 移除之前按钮的激活状态
+            if (activeButton6) {
+                activeButton6.classList.remove('button-active');
+            }
+            // 设置当前按钮为激活状态
+            this.classList.add('button-active');
+            activeButton6 = this;
+        });
+        document.getElementById('swapButton6C').addEventListener('click', function() {
+            // ... 其他代码保持不变 ...
+            // 移除之前按钮的激活状态
+            if (activeButton6) {
+                activeButton6.classList.remove('button-active');
+            }
+            // 设置当前按钮为激活状态
+            this.classList.add('button-active');
+            activeButton6 = this;
+        });
+        document.getElementById('swapButton6D').addEventListener('click', function() {
+            // ... 其他代码保持不变 ...
+            // 移除之前按钮的激活状态
+            if (activeButton6) {
+                activeButton6.classList.remove('button-active');
+            }
+            // 设置当前按钮为激活状态
+            this.classList.add('button-active');
+            activeButton6 = this;
+        });
+        document.getElementById('swapButton6E').addEventListener('click', function() {
+            // ... 其他代码保持不变 ...
+            // 移除之前按钮的激活状态
+            if (activeButton6) {
+                activeButton6.classList.remove('button-active');
+            }
+            // 设置当前按钮为激活状态
+            this.classList.add('button-active');
+            activeButton6 = this;
+        });
+        document.getElementById('swapButton7A').addEventListener('click', function() {
+            // ... 其他代码保持不变 ...
+            // 移除之前按钮的激活状态
+            if (activeButton7) {
+                activeButton7.classList.remove('button-active');
+            }
+            // 设置当前按钮为激活状态
+            this.classList.add('button-active');
+            activeButton7 = this;
+        });
+        document.getElementById('swapButton7B').addEventListener('click', function() {
+            // ... 其他代码保持不变 ...
+            // 移除之前按钮的激活状态
+            if (activeButton7) {
+                activeButton7.classList.remove('button-active');
+            }
+            // 设置当前按钮为激活状态
+            this.classList.add('button-active');
+            activeButton7 = this;
+        });
+        document.getElementById('swapButton7C').addEventListener('click', function() {
+            // ... 其他代码保持不变 ...
+            // 移除之前按钮的激活状态
+            if (activeButton7) {
+                activeButton7.classList.remove('button-active');
+            }
+            // 设置当前按钮为激活状态
+            this.classList.add('button-active');
+            activeButton7 = this;
+        });
+        document.getElementById('swapButton7D').addEventListener('click', function() {
+            // ... 其他代码保持不变 ...
+            // 移除之前按钮的激活状态
+            if (activeButton7) {
+                activeButton7.classList.remove('button-active');
+            }
+            // 设置当前按钮为激活状态
+            this.classList.add('button-active');
+            activeButton7 = this;
+        });
+        document.getElementById('swapButton7E').addEventListener('click', function() {
+            // ... 其他代码保持不变 ...
+            // 移除之前按钮的激活状态
+            if (activeButton7) {
+                activeButton7.classList.remove('button-active');
+            }
+            // 设置当前按钮为激活状态
+            this.classList.add('button-active');
+            activeButton7 = this;
+        });
+        document.getElementById('swapButton8A').addEventListener('click', function() {
+            // ... 其他代码保持不变 ...
+            // 移除之前按钮的激活状态
+            if (activeButton8) {
+                activeButton8.classList.remove('button-active');
+            }
+            // 设置当前按钮为激活状态
+            this.classList.add('button-active');
+            activeButton8 = this;
+        });
+        document.getElementById('swapButton8B').addEventListener('click', function() {
+            // ... 其他代码保持不变 ...
+            // 移除之前按钮的激活状态
+            if (activeButton8) {
+                activeButton8.classList.remove('button-active');
+            }
+            // 设置当前按钮为激活状态
+            this.classList.add('button-active');
+            activeButton8 = this;
+        });
+        document.getElementById('swapButton8C').addEventListener('click', function() {
+            // ... 其他代码保持不变 ...
+            // 移除之前按钮的激活状态
+            if (activeButton8) {
+                activeButton8.classList.remove('button-active');
+            }
+            // 设置当前按钮为激活状态
+            this.classList.add('button-active');
+            activeButton8 = this;
+        });
+        document.getElementById('swapButton8D').addEventListener('click', function() {
+            // ... 其他代码保持不变 ...
+            // 移除之前按钮的激活状态
+            if (activeButton8) {
+                activeButton8.classList.remove('button-active');
+            }
+            // 设置当前按钮为激活状态
+            this.classList.add('button-active');
+            activeButton8 = this;
+        });
+        document.getElementById('swapButton8E').addEventListener('click', function() {
+            // ... 其他代码保持不变 ...
+            // 移除之前按钮的激活状态
+            if (activeButton8) {
+                activeButton8.classList.remove('button-active');
+            }
+            // 设置当前按钮为激活状态
+            this.classList.add('button-active');
+            activeButton8 = this;
+        });
+        document.getElementById('swapButton9A').addEventListener('click', function() {
+            // ... 其他代码保持不变 ...
+            // 移除之前按钮的激活状态
+            if (activeButton9) {
+                activeButton9.classList.remove('button-active');
+            }
+            // 设置当前按钮为激活状态
+            this.classList.add('button-active');
+            activeButton9 = this;
+        });
+        document.getElementById('swapButton9B').addEventListener('click', function() {
+            // ... 其他代码保持不变 ...
+            // 移除之前按钮的激活状态
+            if (activeButton9) {
+                activeButton9.classList.remove('button-active');
+            }
+            // 设置当前按钮为激活状态
+            this.classList.add('button-active');
+            activeButton9 = this;
+        });
+        document.getElementById('swapButton9C').addEventListener('click', function() {
+            // ... 其他代码保持不变 ...
+            // 移除之前按钮的激活状态
+            if (activeButton9) {
+                activeButton9.classList.remove('button-active');
+            }
+            // 设置当前按钮为激活状态
+            this.classList.add('button-active');
+            activeButton9 = this;
+        });
+        document.getElementById('swapButton9D').addEventListener('click', function() {
+            // ... 其他代码保持不变 ...
+            // 移除之前按钮的激活状态
+            if (activeButton9) {
+                activeButton9.classList.remove('button-active');
+            }
+            // 设置当前按钮为激活状态
+            this.classList.add('button-active');
+            activeButton9 = this;
+        });
+        document.getElementById('swapButton9E').addEventListener('click', function() {
+            // ... 其他代码保持不变 ...
+            // 移除之前按钮的激活状态
+            if (activeButton9) {
+                activeButton9.classList.remove('button-active');
+            }
+            // 设置当前按钮为激活状态
+            this.classList.add('button-active');
+            activeButton9 = this;
+        });
+</script>
+
+    <script src="script.js"></script>
+    <!-- 为浏览器加载 <model-viewer>: -->
+<script type="module" src="model-viewer.min.js"></script>
+</body>
+</html>
