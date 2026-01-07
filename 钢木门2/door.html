@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <title>&lt;model-viewer&gt; 模板</title>
+    <meta charset="utf-8">
+    <meta name="description" content="&lt;model-viewer&gt; 模板">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link type="text/css" href="./styles.css" rel="stylesheet"/>
+    <style>
+        #modelBox1, #modelBox2 {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+        }
+        #modelBox2 {
+            z-index: 0;
+        }
+        model-viewer {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+        /* 按钮样式 */
+        .swap-button {
+            position: absolute;
+            z-index: 10;
+            width: 70px;
+            height: 30px;
+            font-size: 13px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #swapButton1 { top: 20px; left: 20px; }
+        #swapButton2 { top: 20px; left: 100px; }
+        #swapButton3 { top: 20px; right: 50px; width: 90px; }
+        #swapButton4 { top: 20px; right: 50px; width: 90px; }
+        .swap-button:hover {
+            background-color: #938bff;
+        }
+        .button-active {
+            background-color: #938bff;
+        }
+        /* 加载界面样式 */
+        #loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #fff;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        #loadingImage {
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            height: 40%;
+            width: auto;
+        }
+        #progressBarContainer {
+            position: absolute;
+            top: 70%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60%;
+            height: 25px;
+            background-color: #ddd;
+            border-radius: 12.5px;
+        }
+        #progressBar {
+            width: 0%;
+            height: 100%;
+            background-color: #938bff;
+            text-align: center;
+            line-height: 25px;
+            color: white;
+            border-radius: 12.5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="loading">
+        <img src="logo.jpg" alt="Loading..." id="loadingImage">
+        <div id="progressBarContainer">
+            <div id="progressBar">0%</div>
+        </div>
+    </div>
+    <div id="modelBox1">
+        <model-viewer id="mv1" background-color="red" src="钢门小样.glb" camera-controls tone-mapping="neutral" poster="1.gif" shadow-intensity="1" animation-name="面板Action" min-camera-orbit="auto auto 10m" max-camera-orbit="auto auto 158.8m" camera-orbit="-24.48deg 94.4deg 158.8m" field-of-view="40.56deg" environment-image="背景.hdr" skybox-image="底色.jpg" exposure="1.5">
+        </model-viewer>
+        <button id="swapButton3" class="swap-button">🧩Open</button>
+    </div>
+    <div id="modelBox2">
+        <model-viewer id="mv2" background-color="red" src="木门小样.glb" camera-controls tone-mapping="neutral" poster="1.gif" shadow-intensity="1" animation-name="面板Action" min-camera-orbit="auto auto 10m" max-camera-orbit="auto auto 158.8m" camera-orbit="24.48deg 94.4deg 158.8m" field-of-view="40.56deg" environment-image="背景.hdr" skybox-image="底色.jpg" exposure="1.5">
+        </model-viewer>
+        <button id="swapButton4" class="swap-button">🧩Open</button>
+    </div>
+    <button id="swapButton1" class="swap-button button-active">Steel</button>
+    <button id="swapButton2" class="swap-button">Wood</button>
+
+    <script>
+        // 切换场景
+        const modelBox1 = document.getElementById('modelBox1');
+        const modelBox2 = document.getElementById('modelBox2');
+        const swapButton1 = document.getElementById('swapButton1');
+        const swapButton2 = document.getElementById('swapButton2');
+
+        swapButton1.addEventListener('click', () => {
+            modelBox1.style.zIndex = 2;
+            modelBox2.style.zIndex = 1;
+            setActiveButton(swapButton1);
+        });
+
+        swapButton2.addEventListener('click', () => {
+            modelBox1.style.zIndex = 1;
+            modelBox2.style.zIndex = 2;
+            setActiveButton(swapButton2);
+        });
+
+        // 设置激活按钮
+        let activeButton = swapButton1;
+        function setActiveButton(button) {
+            activeButton.classList.remove('button-active');
+            button.classList.add('button-active');
+            activeButton = button;
+        }
+
+        // 动画播放逻辑
+        function setupAnimation(modelViewer, button) {
+            let isPlaying = false;
+            let halfTime = 0;
+
+            modelViewer.addEventListener('load', () => {
+                halfTime = (modelViewer.duration || 3) / 2;
+            });
+
+            button.addEventListener('click', () => {
+                if (!isPlaying) {
+                    modelViewer.currentTime = 0;
+                    modelViewer.play();
+                    button.style.display = 'none';
+                    setTimeout(() => {
+                        modelViewer.pause();
+                        button.style.display = 'block';
+                        button.textContent = '🧩Close';
+                    }, halfTime * 1000);
+                    isPlaying = true;
+                } else {
+                    modelViewer.play();
+                    button.style.display = 'none';
+                    setTimeout(() => {
+                        button.style.display = 'block';
+                        button.textContent = '🧩Open';
+                    }, halfTime * 1000);
+                    setTimeout(() => {
+                        modelViewer.pause();
+                        isPlaying = false;
+                    }, halfTime * 1000);
+                }
+            });
+        }
+
+        setupAnimation(document.getElementById('mv1'), document.getElementById('swapButton3'));
+        setupAnimation(document.getElementById('mv2'), document.getElementById('swapButton4'));
+
+        // 加载进度逻辑
+        let loadedModels = 0;
+        const totalModels = 2;
+
+        function updateProgressBar(loaded, total) {
+            const progressBar = document.getElementById('progressBar');
+            const progress = (loaded / total) * 100;
+            progressBar.style.width = progress + '%';
+            progressBar.textContent = Math.round(progress) + '%';
+        }
+
+        function handleModelLoad() {
+            loadedModels++;
+            updateProgressBar(loadedModels, totalModels);
+            if (loadedModels === totalModels) {
+                setTimeout(() => {
+                    document.getElementById('loading').style.display = 'none';
+                }, 1000);
+            }
+        }
+
+        document.getElementById('mv1').addEventListener('load', handleModelLoad);
+        document.getElementById('mv2').addEventListener('load', handleModelLoad);
+    </script>
+
+    <script src="script.js"></script>
+    <script type="module" src="model-viewer.min.js"></script>
+</body>
+</html>
